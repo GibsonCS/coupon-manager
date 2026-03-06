@@ -1,6 +1,7 @@
 package com.onebrain.onebrain.domain;
 
 import com.onebrain.onebrain.exception.BusinessException;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -8,17 +9,25 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.UUID;
 
+
+@Entity
+@Table(name = "coupon")
 public class Coupon {
-    private final UUID id;
-    private final String code;
-    private final String description;
-    private final BigDecimal discountValue;
-    private final LocalDate expirationDate;
-    private final CouponStatus status;
-    private final boolean published;
-    private final boolean redeemed;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+    private String code;
+    private String description;
+    private BigDecimal discountValue;
+    private LocalDate expirationDate;
+    private CouponStatus status;
+    private boolean published;
+    private boolean redeemed;
 
     private boolean deleted;
+
+    public Coupon() {
+    }
 
     private Coupon(String code, String description, BigDecimal discountValue, LocalDate expirationDate, boolean published) {
         this.id = UUID.randomUUID();
