@@ -15,22 +15,28 @@ public class Coupon {
     private final LocalDate expirationDate;
 
     private final CouponStatus couponStatus = CouponStatus.ACTIVE;
-    private final boolean published = false;
+    private final boolean published;
     private final boolean redeemed = false;
 
-    private Coupon(String code, String description, BigDecimal discountValue, LocalDate expirationDate) {
+    private Coupon(String code, String description, BigDecimal discountValue, LocalDate expirationDate,boolean published) {
         this.code = code;
         this.description = description;
         this.discountValue = discountValue;
         this.expirationDate = expirationDate;
+        this.published = published;
     }
 
-    public static Coupon create(String code, String description, BigDecimal discountValue, String expirationDate) {
+    public static Coupon create(String code, String description, BigDecimal discountValue, String expirationDate, boolean published) {
         validateExpirationDate(expirationDate);
         validateDiscount(discountValue);
         String sanitizedCode = sanitizeCode(code);
 
-        return new Coupon(sanitizedCode, description, discountValue, Instant.parse(expirationDate).atZone(ZoneId.of("UTC")).toLocalDate());
+        return new Coupon(
+                sanitizedCode,
+                description, discountValue,
+                Instant.parse(expirationDate).atZone(ZoneId.of("UTC")).toLocalDate(),
+                published
+        );
     }
 
     private static String sanitizeCode(String couponCode) {
