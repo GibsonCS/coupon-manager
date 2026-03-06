@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CouponTest {
 
@@ -82,5 +81,39 @@ public class CouponTest {
         );
         assertEquals("A123SA", coupon.getCode());
         assertEquals(new BigDecimal("0.6"), coupon.getDiscountValue());
+    }
+
+    @Test
+    void shouldThrowExceptionIfCouponAlreadyDeleted() {
+        Coupon coupon = Coupon.create(
+                "A123SA",
+                "Description",
+                new BigDecimal("0.6"),
+                "2026-11-04T17:14:45.180Z",
+                false
+        );
+
+        coupon.delete();
+
+        BusinessException exception = assertThrows(BusinessException.class, coupon::delete);
+
+        String expectedMessage = "Coupon already deleted";
+
+        assertEquals(expectedMessage, exception.getMessage());
+    }
+
+    @Test
+    void shouldDeleteCoupon() {
+        Coupon coupon = Coupon.create(
+                "A123SA",
+                "Description",
+                new BigDecimal("0.6"),
+                "2026-11-04T17:14:45.180Z",
+                false
+        );
+
+        coupon.delete();
+
+        assertTrue(coupon.isDeleted());
     }
 }
