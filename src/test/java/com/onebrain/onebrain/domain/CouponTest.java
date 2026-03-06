@@ -46,5 +46,49 @@ public class CouponTest {
     }
 
     @Test
-    void
+    void shouldThrowExceptionAfterRemoveSpecialCharacters() {
+        BusinessException exception =  assertThrows(BusinessException.class, () -> Coupon.create(
+                "A123SADA$%#",
+                "Description",
+                new BigDecimal("0.5"),
+                "07/03/2026")
+        );
+
+        String expectedMessage = "Invalid coupon code length after remove special characters";
+
+        assertEquals(expectedMessage, exception.getMessage());
+    }
+
+
+    @Test
+    void shouldThrowExceptionAfterWhenInvalidDiscountValue() {
+        BusinessException exception =  assertThrows(BusinessException.class, () -> Coupon.create(
+                "A123SA",
+                "Description",
+                new BigDecimal("0.3"),
+                "07/03/2026")
+        );
+
+        String expectedMessage = "The min discount value is 0.5";
+
+        assertEquals(expectedMessage, exception.getMessage());
+    }
+
+    @Test
+    void shouldCreateNewCoupon() {
+        BusinessException exception =  assertThrows(BusinessException.class, () -> Coupon.create(
+                "A123SA",
+                "Description",
+                new BigDecimal("0.3"),
+                "07/03/2026")
+        );
+
+        String expectedMessage = "The min discount value is 0.5";
+
+        assertEquals(expectedMessage, exception.getMessage());
+    }
+
+
+
+
 }

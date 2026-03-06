@@ -32,10 +32,10 @@ public class Coupon {
     }
 
     private static String sanitizeCode(String couponCode) {
-        if (couponCode.length() != 6) throw new BusinessException("Invalid coupon code length");
+        if (couponCode.length() < 6) throw new BusinessException("Invalid coupon code length");
         String sanitizedCoupon = couponCode.replaceAll("[^a-zA-Z0-9]$", "");
         if (sanitizedCoupon.length() != 6)
-            throw new BusinessException("Invalid coupon code length after sanitize coupon");
+            throw new BusinessException("Invalid coupon code length after remove special characters");
 
         return sanitizedCoupon;
     }
@@ -52,7 +52,7 @@ public class Coupon {
 
     private static void validateDiscount(BigDecimal couponDiscount) {
         if (couponDiscount.compareTo(new BigDecimal("0.5")) < 0) {
-            throw new BusinessException("Min discount value is 0.5");
+            throw new BusinessException("The min discount value is 0.5");
         }
     }
 
