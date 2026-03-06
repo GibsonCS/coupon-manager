@@ -16,7 +16,7 @@ public class Coupon {
     private final boolean published;
     private final boolean redeemed;
 
-    private Coupon(String code, String description, BigDecimal discountValue, LocalDate expirationDate,boolean published) {
+    private Coupon(String code, String description, BigDecimal discountValue, LocalDate expirationDate, boolean published) {
         this.code = code;
         this.description = description;
         this.discountValue = discountValue;
