@@ -16,6 +16,8 @@ public class Coupon {
     private final boolean published;
     private final boolean redeemed;
 
+    private boolean deleted;
+
     private Coupon(String code, String description, BigDecimal discountValue, LocalDate expirationDate, boolean published) {
         this.code = code;
         this.description = description;
@@ -24,6 +26,7 @@ public class Coupon {
         this.status = CouponStatus.ACTIVE;
         this.published = published;
         this.redeemed = false;
+        this.deleted = false;
     }
 
     public static Coupon create(String code, String description, BigDecimal discountValue, String expirationDate, boolean published) {
@@ -31,12 +34,7 @@ public class Coupon {
         validateDiscount(discountValue);
         String sanitizedCode = sanitizeCode(code);
 
-        return new Coupon(
-                sanitizedCode,
-                description, discountValue,
-                Instant.parse(expirationDate).atZone(ZoneId.of("UTC")).toLocalDate(),
-                published
-        );
+        return new Coupon(sanitizedCode, description, discountValue, Instant.parse(expirationDate).atZone(ZoneId.of("UTC")).toLocalDate(), published);
     }
 
     private static String sanitizeCode(String couponCode) {
@@ -60,6 +58,13 @@ public class Coupon {
         if (couponDiscount.compareTo(new BigDecimal("0.5")) < 0) {
             throw new BusinessException("The min discount value is 0.5");
         }
+    }
+
+    public void delete() {
+        if (this.deleted) {
+            throw new BusinessException("Coupon already deleted");
+        }
+        this.deleted = true;
     }
 
     public String getCode() {
@@ -88,5 +93,21 @@ public class Coupon {
 
     public boolean getRedeemed() {
         return redeemed;
+    }
+
+    public CouponStatus getStatus() {
+        return status;
+    }
+
+    public boolean isPublished() {
+        return published;
+    }
+
+    public boolean isRedeemed() {
+        return redeemed;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
     }
 }
