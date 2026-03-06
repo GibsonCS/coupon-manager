@@ -76,6 +76,7 @@ public class CouponTest {
                 new BigDecimal("0.6"),
                 "2026-11-04T17:14:45.180Z"
        );
-       assertInstanceOf(Coupon.class, coupon);
+       assertEquals("A123SA", coupon.getCode());
+       assertEquals(new BigDecimal("0.6"), coupon.getDiscountValue());
     }
 }
