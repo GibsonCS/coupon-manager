@@ -26,7 +26,7 @@ public class Coupon {
 
     private boolean deleted;
 
-    public Coupon() {
+    protected Coupon() {
     }
 
     private Coupon(String code, String description, BigDecimal discountValue, LocalDate expirationDate, boolean published) {
