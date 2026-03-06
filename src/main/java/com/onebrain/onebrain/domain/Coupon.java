@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 
 public class Coupon {
     private final String code;
@@ -16,7 +15,7 @@ public class Coupon {
 
     private final CouponStatus couponStatus = CouponStatus.ACTIVE;
     private final boolean published;
-    private final boolean redeemed = false;
+    private final boolean redeemed;
 
     private Coupon(String code, String description, BigDecimal discountValue, LocalDate expirationDate,boolean published) {
         this.code = code;
@@ -24,6 +23,7 @@ public class Coupon {
         this.discountValue = discountValue;
         this.expirationDate = expirationDate;
         this.published = published;
+        this.redeemed = false;
     }
 
     public static Coupon create(String code, String description, BigDecimal discountValue, String expirationDate, boolean published) {
