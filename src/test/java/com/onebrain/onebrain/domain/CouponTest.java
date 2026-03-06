@@ -4,8 +4,8 @@ package com.onebrain.onebrain.domain;
 import com.onebrain.onebrain.exception.BusinessException;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CouponTest {
@@ -21,7 +21,7 @@ public class CouponTest {
 
        String expectedMessage = "Invalid coupon code length";
 
-       assertEquals(exception.getMessage(), expectedMessage);
+       assertEquals( expectedMessage, exception.getMessage());
     }
 
     @Test
@@ -70,11 +70,12 @@ public class CouponTest {
 
     @Test
     void shouldCreateNewCoupon() {
-        System.out.println(Coupon.create(
+       Coupon coupon = Coupon.create(
                 "A123SA",
                 "Description",
                 new BigDecimal("0.6"),
-                "2026-11-04T17:14:45.180Z")
-        );
+                "2026-11-04T17:14:45.180Z"
+       );
+       assertInstanceOf(Coupon.class, coupon);
     }
 }
