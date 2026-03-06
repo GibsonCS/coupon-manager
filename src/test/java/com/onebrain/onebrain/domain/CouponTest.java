@@ -1,37 +1,38 @@
 package com.onebrain.onebrain.domain;
 
-
 import com.onebrain.onebrain.exception.BusinessException;
 import org.junit.jupiter.api.Test;
+
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CouponTest {
 
     @Test
     void shouldThrowExceptionWhenCouponCodeIsLessThanSix() {
-       BusinessException exception =  assertThrows(BusinessException.class, () -> Coupon.create(
+        BusinessException exception = assertThrows(BusinessException.class, () -> Coupon.create(
                 "123",
                 "Description",
                 new BigDecimal("0.5"),
-               "2026-11-04T17:14:45.180Z")
-       );
+                "2026-11-04T17:14:45.180Z",
+                false)
+        );
 
-       String expectedMessage = "Invalid coupon code length";
+        String expectedMessage = "Invalid coupon code length";
 
-       assertEquals( expectedMessage, exception.getMessage());
+        assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
     void shouldThrowExceptionWhenCouponExpirationDateIsInvalid() {
-
-        BusinessException exception =  assertThrows(BusinessException.class, () -> Coupon.create(
+        BusinessException exception = assertThrows(BusinessException.class, () -> Coupon.create(
                 "123SDF",
                 "Description",
                 new BigDecimal("0.5"),
-                "2026-02-04T17:14:45.180Z")
+                "2026-02-04T17:14:45.180Z",
+                false)
         );
 
         String expectedMessage = "Invalid coupon expiration date";
@@ -41,11 +42,12 @@ public class CouponTest {
 
     @Test
     void shouldThrowExceptionAfterRemoveSpecialCharacters() {
-        BusinessException exception =  assertThrows(BusinessException.class, () -> Coupon.create(
+        BusinessException exception = assertThrows(BusinessException.class, () -> Coupon.create(
                 "A123SADA$%#",
                 "Description",
                 new BigDecimal("0.5"),
-                "2026-11-04T17:14:45.180Z")
+                "2026-11-04T17:14:45.180Z",
+                false)
         );
 
         String expectedMessage = "Invalid coupon code length after remove special characters";
@@ -56,11 +58,12 @@ public class CouponTest {
 
     @Test
     void shouldThrowExceptionAfterWhenInvalidDiscountValue() {
-        BusinessException exception =  assertThrows(BusinessException.class, () -> Coupon.create(
+        BusinessException exception = assertThrows(BusinessException.class, () -> Coupon.create(
                 "A123SA",
                 "Description",
                 new BigDecimal("0.3"),
-                "2026-11-04T17:14:45.180Z")
+                "2026-11-04T17:14:45.180Z",
+                false)
         );
 
         String expectedMessage = "The min discount value is 0.5";
@@ -70,13 +73,14 @@ public class CouponTest {
 
     @Test
     void shouldCreateNewCoupon() {
-       Coupon coupon = Coupon.create(
+        Coupon coupon = Coupon.create(
                 "A123SA",
                 "Description",
                 new BigDecimal("0.6"),
-                "2026-11-04T17:14:45.180Z"
-       );
-       assertEquals("A123SA", coupon.getCode());
-       assertEquals(new BigDecimal("0.6"), coupon.getDiscountValue());
+                "2026-11-04T17:14:45.180Z",
+                false
+        );
+        assertEquals("A123SA", coupon.getCode());
+        assertEquals(new BigDecimal("0.6"), coupon.getDiscountValue());
     }
 }
