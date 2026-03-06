@@ -12,8 +12,7 @@ public class Coupon {
     private final String description;
     private final BigDecimal discountValue;
     private final LocalDate expirationDate;
-
-    private final CouponStatus couponStatus = CouponStatus.ACTIVE;
+    private final CouponStatus status;
     private final boolean published;
     private final boolean redeemed;
 
@@ -22,6 +21,7 @@ public class Coupon {
         this.description = description;
         this.discountValue = discountValue;
         this.expirationDate = expirationDate;
+        this.status = CouponStatus.ACTIVE;
         this.published = published;
         this.redeemed = false;
     }
@@ -79,7 +79,7 @@ public class Coupon {
     }
 
     public CouponStatus getCouponStatus() {
-        return couponStatus;
+        return status;
     }
 
     public boolean getPublished() {
