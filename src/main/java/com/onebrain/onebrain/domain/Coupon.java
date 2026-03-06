@@ -6,8 +6,10 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.UUID;
 
 public class Coupon {
+    private final UUID id;
     private final String code;
     private final String description;
     private final BigDecimal discountValue;
@@ -19,6 +21,7 @@ public class Coupon {
     private boolean deleted;
 
     private Coupon(String code, String description, BigDecimal discountValue, LocalDate expirationDate, boolean published) {
+        this.id = UUID.randomUUID();
         this.code = code;
         this.description = description;
         this.discountValue = discountValue;
@@ -99,15 +102,7 @@ public class Coupon {
         return status;
     }
 
-    public boolean isPublished() {
-        return published;
-    }
-
-    public boolean isRedeemed() {
-        return redeemed;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
+    public UUID getId() {
+        return id;
     }
 }
