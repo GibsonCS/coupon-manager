@@ -3,18 +3,20 @@ package com.onebrain.onebrain.domain;
 import com.onebrain.onebrain.exception.BusinessException;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class Coupon {
-    private String code;
-    private String description;
-    private BigDecimal discountValue;
-    private LocalDate expirationDate;
+    private final String code;
+    private final String description;
+    private final BigDecimal discountValue;
+    private final LocalDate expirationDate;
 
-    private CouponStatus couponStatus = CouponStatus.ACTIVE;
-    private boolean published = false;
-    private boolean redeemed = false;
+    private final CouponStatus couponStatus = CouponStatus.ACTIVE;
+    private final boolean published = false;
+    private final boolean redeemed = false;
 
     private Coupon(String code, String description, BigDecimal discountValue, LocalDate expirationDate) {
         this.code = code;
@@ -28,7 +30,7 @@ public class Coupon {
         validateDiscount(discountValue);
         String sanitizedCode = sanitizeCode(code);
 
-        return new Coupon(sanitizedCode, description, discountValue, LocalDate.parse(expirationDate));
+        return new Coupon(sanitizedCode, description, discountValue, Instant.parse(expirationDate).atZone(ZoneId.of("UTC")).toLocalDate());
     }
 
     private static String sanitizeCode(String couponCode) {
@@ -41,11 +43,9 @@ public class Coupon {
     }
 
     private static void validateExpirationDate(String expirationDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = Instant.parse(expirationDate).atZone(ZoneId.of("UTC")).toLocalDate();
 
-        LocalDate expirationDateFormated = LocalDate.parse(expirationDate, formatter);
-
-        if (expirationDateFormated.isBefore(LocalDate.now())) {
+        if (localDate.isBefore(LocalDate.now())) {
             throw new BusinessException("Invalid coupon expiration date");
         }
     }
