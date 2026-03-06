@@ -105,4 +105,8 @@ public class Coupon {
     public UUID getId() {
         return id;
     }
+
+    public boolean getDeleted() {
+        return this.deleted;
+    }
 }
