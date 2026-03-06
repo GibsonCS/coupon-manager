@@ -3,6 +3,7 @@ target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 htmlReport/
+application.properties
 #!**/src/test/**/target/
 
 ### STS ###
