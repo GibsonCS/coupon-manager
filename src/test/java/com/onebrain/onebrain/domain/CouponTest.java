@@ -114,6 +114,6 @@ public class CouponTest {
 
         coupon.delete();
 
-        assertTrue(coupon.isDeleted());
+        assertTrue(coupon.getDeleted());
     }
 }
