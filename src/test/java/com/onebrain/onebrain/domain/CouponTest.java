@@ -1,15 +1,9 @@
 package com.onebrain.onebrain.domain;
 
 
-import com.onebrain.onebrain.dto.CouponDTO;
 import com.onebrain.onebrain.exception.BusinessException;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -22,7 +16,7 @@ public class CouponTest {
                 "123",
                 "Description",
                 new BigDecimal("0.5"),
-               "20/04/2026")
+               "2026-11-04T17:14:45.180Z")
        );
 
        String expectedMessage = "Invalid coupon code length";
@@ -37,7 +31,7 @@ public class CouponTest {
                 "123SDF",
                 "Description",
                 new BigDecimal("0.5"),
-                "04/03/2026")
+                "2026-02-04T17:14:45.180Z")
         );
 
         String expectedMessage = "Invalid coupon expiration date";
@@ -51,7 +45,7 @@ public class CouponTest {
                 "A123SADA$%#",
                 "Description",
                 new BigDecimal("0.5"),
-                "07/03/2026")
+                "2026-11-04T17:14:45.180Z")
         );
 
         String expectedMessage = "Invalid coupon code length after remove special characters";
@@ -66,7 +60,7 @@ public class CouponTest {
                 "A123SA",
                 "Description",
                 new BigDecimal("0.3"),
-                "07/03/2026")
+                "2026-11-04T17:14:45.180Z")
         );
 
         String expectedMessage = "The min discount value is 0.5";
@@ -76,19 +70,11 @@ public class CouponTest {
 
     @Test
     void shouldCreateNewCoupon() {
-        BusinessException exception =  assertThrows(BusinessException.class, () -> Coupon.create(
+        System.out.println(Coupon.create(
                 "A123SA",
                 "Description",
-                new BigDecimal("0.3"),
-                "07/03/2026")
+                new BigDecimal("0.6"),
+                "2026-11-04T17:14:45.180Z")
         );
-
-        String expectedMessage = "The min discount value is 0.5";
-
-        assertEquals(expectedMessage, exception.getMessage());
     }
-
-
-
-
 }
