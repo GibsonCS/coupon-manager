@@ -128,4 +128,47 @@ class CouponServiceTest {
         assertEquals(new BigDecimal("0.5"), couponResponse.discountValue());
         Mockito.verify(couponRepository).findById(UUID.fromString(couponId));
     }
+
+    @Test
+    void shouldThrowAnExceptionIfCouponHasAlreadyBennDeleted() {
+        UUID couponId = UUID.randomUUID();
+
+        mockCoupon = Coupon.create(
+                "ACDEA4",
+                "TEST OF COUPON CREATE",
+                new BigDecimal("0.5"),
+                "2026-11-04T17:14:45.180Z",
+                false
+        );
+
+        mockCoupon.delete();
+
+        Mockito
+                .when(couponRepository.findById(couponId))
+                .thenReturn(Optional.of(mockCoupon));
+
+        assertThrows(BusinessException.class, () -> couponService.delete(couponId.toString()));
+        Mockito.verify(couponRepository).findById(couponId);
+    }
+
+    @Test
+    void shouldDeleteACoupon() {
+        UUID couponIdUUID = UUID.randomUUID();
+
+        mockCoupon = Coupon.create(
+                "ACDEA4",
+                "TEST OF COUPON CREATE",
+                new BigDecimal("0.5"),
+                "2026-11-04T17:14:45.180Z",
+                false
+        );
+
+        Mockito
+                .when(couponRepository.findById(couponIdUUID))
+                .thenReturn(Optional.of(mockCoupon));
+
+        couponService.delete(couponIdUUID.toString());
+
+        Mockito.verify(couponRepository).findById(couponIdUUID);
+    }
 }
