@@ -1,7 +1,10 @@
 package com.onebrain.onebrain.domain;
 
 import com.onebrain.onebrain.exception.BusinessException;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -11,17 +14,26 @@ import java.util.UUID;
 
 
 @Entity
-@Table(name = "coupon")
 public class Coupon {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @NotNull
     private UUID id;
+
+    @Column(unique = true)
     private String code;
+
     private String description;
+
+    @Column(name = "discount_value")
     private BigDecimal discountValue;
-    private LocalDate expirationDate;
+
+    @Column(name = "expiration_date")
+    private Instant expirationDate;
+
     private CouponStatus status;
+
     private boolean published;
+
     private boolean redeemed;
 
     private boolean deleted;
@@ -29,7 +41,7 @@ public class Coupon {
     protected Coupon() {
     }
 
-    private Coupon(String code, String description, BigDecimal discountValue, LocalDate expirationDate, boolean published) {
+    private Coupon(String code, String description, BigDecimal discountValue, Instant expirationDate, boolean published) {
         this.id = UUID.randomUUID();
         this.code = code;
         this.description = description;
@@ -46,7 +58,7 @@ public class Coupon {
         validateDiscount(discountValue);
         String sanitizedCode = sanitizeCode(code);
 
-        return new Coupon(sanitizedCode, description, discountValue, Instant.parse(expirationDate).atZone(ZoneId.of("UTC")).toLocalDate(), published);
+        return new Coupon(sanitizedCode, description, discountValue, Instant.parse(expirationDate).atZone(ZoneId.of("UTC")).toInstant(), published);
     }
 
     private static String sanitizeCode(String couponCode) {
