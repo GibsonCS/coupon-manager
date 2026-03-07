@@ -7,6 +7,8 @@ import com.onebrain.onebrain.exception.BusinessException;
 import com.onebrain.onebrain.repository.CouponRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class CouponService {
     private final CouponRepository couponRepository;
@@ -40,6 +42,24 @@ public class CouponService {
                 savedCoupon.getStatus(),
                 savedCoupon.getPublished(),
                 savedCoupon.getRedeemed()
+        );
+    }
+
+    public CouponResponse get(String couponId) {
+
+        UUID couponIdUDDI = UUID.fromString(couponId);
+
+        Coupon couponFounded = couponRepository.findById(couponIdUDDI).orElseThrow(() -> new BusinessException("Coupon not exists"));
+
+        return new CouponResponse(
+                couponFounded.getId(),
+                couponFounded.getCode(),
+                couponFounded.getDescription(),
+                couponFounded.getDiscountValue(),
+                couponFounded.getExpirationDate(),
+                couponFounded.getStatus(),
+                couponFounded.getPublished(),
+                couponFounded.getRedeemed()
         );
     }
 }
