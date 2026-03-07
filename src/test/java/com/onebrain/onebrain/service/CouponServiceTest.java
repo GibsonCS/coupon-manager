@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -90,5 +91,41 @@ class CouponServiceTest {
         assertEquals("2026-11-04T17:14:45.180Z", couponResponse.expirationDate());
         assertEquals(new BigDecimal("0.5"), couponResponse.discountValue());
         Mockito.verify(couponRepository).save(Mockito.any());
+    }
+
+    @Test
+    void shouldThrowAnExceptionIfCouponNotExists() {
+        UUID couponId = UUID.randomUUID();
+
+        Mockito
+                .when(couponRepository.findById(couponId))
+                .thenReturn(Optional.empty());
+
+        assertThrows(BusinessException.class, () -> couponService.get(couponId.toString()));
+        Mockito.verify(couponRepository).findById(couponId);
+    }
+
+    @Test
+    void shouldReturnAnCoupon() {
+        String couponId = "73ae73d6-5ca2-4eaf-a93c-ce70bf3649d2";
+
+        mockCoupon = Coupon.create(
+                "ACDEA4",
+                "TEST OF COUPON CREATE",
+                new BigDecimal("0.5"),
+                "2026-11-04T17:14:45.180Z",
+                false
+        );
+
+        Mockito
+                .when(couponRepository.findById(UUID.fromString(couponId)))
+                .thenReturn(Optional.of(mockCoupon));
+
+        CouponResponse couponResponse = couponService.get(couponId);
+
+        assertEquals("ACDEA4", couponResponse.code());
+        assertEquals("2026-11-04T17:14:45.180Z", couponResponse.expirationDate());
+        assertEquals(new BigDecimal("0.5"), couponResponse.discountValue());
+        Mockito.verify(couponRepository).findById(UUID.fromString(couponId));
     }
 }
