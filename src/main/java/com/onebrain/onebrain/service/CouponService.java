@@ -62,4 +62,17 @@ public class CouponService {
                 couponFounded.getRedeemed()
         );
     }
+
+    public void delete(String couponId) {
+        UUID couponIdUUID = UUID.fromString(couponId);
+
+        couponRepository.findById(couponIdUUID)
+                .ifPresentOrElse(c -> {
+                            c.delete();
+                            couponRepository.save(c);
+                        }, () -> {
+                            throw new BusinessException("Coupon not exists");
+                        }
+                );
+    }
 }
