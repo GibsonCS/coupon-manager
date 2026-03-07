@@ -33,4 +33,11 @@ public class CouponController {
                 .status(HttpStatus.OK)
                 .body(couponService.get(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        couponService.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }
