@@ -16,6 +16,17 @@ A aplicação foi construída seguindo rigorosas boas práticas de desenvolvimen
 
 ---
 
+## 🔌 API Endpoints
+
+Abaixo estão as rotas disponíveis na aplicação. Você pode testá-las usando ferramentas como **Postman**, **Insomnia** ou **cURL**.
+
+| Método | Endpoint | Ação | Status Sucesso |
+| :--- | :--- | :--- | :--- |
+| <img src="https://img.shields.io/badge/POST-brightgreen?style=flat-square" /> | `/coupons` | Cadastra um novo cupom | `201 Created` |
+| <img src="https://img.shields.io/badge/GET-blue?style=flat-square" /> | `/coupons/{id}` | Recupera detalhes por ID | `200 OK` |
+| <img src="https://img.shields.io/badge/DELETE-red?style=flat-square" /> | `/coupons/{id}` | Remove um cupom (Soft Delete) | `204 No Content` |
+
+
 ## 🏗️ Arquitetura do Sistema
 
 A arquitetura segue o padrão **Controller → Service → Repository**. Abaixo, o fluxo de comunicação entre os componentes:
@@ -51,16 +62,6 @@ graph TD
     E -.->|Error Response| A
 ```
 
-## 🔌 API Endpoints
-
-Abaixo estão as rotas disponíveis na aplicação. Você pode testá-las usando ferramentas como **Postman**, **Insomnia** ou **cURL**.
-
-| Método | Endpoint | Ação | Status Sucesso |
-| :--- | :--- | :--- | :--- |
-| <img src="https://img.shields.io/badge/POST-brightgreen?style=flat-square" /> | `/coupons` | Cadastra um novo cupom | `201 Created` |
-| <img src="https://img.shields.io/badge/GET-blue?style=flat-square" /> | `/coupons/{id}` | Recupera detalhes por ID | `200 OK` |
-| <img src="https://img.shields.io/badge/DELETE-red?style=flat-square" /> | `/coupons/{id}` | Remove um cupom (Soft Delete) | `204 No Content` |
-
 ### 🛠️ Exemplo de Payload (POST)
 ```json
 {
@@ -91,47 +92,6 @@ sequenceDiagram
     S-->>C: DTO
     C-->>U: 201 Created + JSON
 ```
-
-## 🛠️ Tecnologias e Ferramentas
-
-* **Linguagem:** Java 17 LTS
-* **Framework:** Spring Boot 3.x
-* **Dados:** Spring Data JPA & H2 Database
-* **Build:** Maven
-* **Testes:** JUnit 5, Mockito, WebMVC Test
-
-## 🚀 Como Executar
-
-### Pré-requisitos:
-* Java 17 instalado.
-* Maven configurado no PATH.
-
-## 🚀 Guia de Execução
-
-Siga os passos abaixo para rodar o projeto localmente em menos de 2 minutos.
-
-### 1️⃣ Pré-requisitos
-* **Java 17** (ou superior)
-* **Maven 3.8+**
-* **Git**
-
-### 2️⃣ Instalação, Build e Execução
-Abra o seu terminal e execute:
-
-```bash
-# Clone o repositório
-git clone https://github.com/GibsonCS/onebrain.git
-
-# Entre na pasta
-cd onebrain
-
-# Limpe e compile o projeto (gera o arquivo .jar)
-mvn clean package
-
-# Execute o artefato gerado
-java -jar target/onebrain-0.0.1-SNAPSHOT.jar
-```
-
 ## 🗄️ Persistência e Acesso
 
 ```mermaid
@@ -165,6 +125,36 @@ API Base URL: http://localhost:8080
 Console do Banco: http://localhost:8080/h2-console
 
 Para configurações do Console H2 vide application-example.properties
+
+## 🛠️ Tecnologias e Ferramentas
+
+* **Linguagem:** Java 17 LTS
+* **Framework:** Spring Boot 3.x
+* **Dados:** Spring Data JPA & H2 Database
+* **Build:** Maven
+* **Testes:** JUnit 5, Mockito, WebMVC Test
+
+## 🚀 Guia de Execução
+
+1️⃣ Pré-requisitos:
+
+* Docker e Docker Compose instalados.
+* Git para clonar o repositório.
+
+2️⃣ Instalação, Build e Execução:
+
+Abra o seu terminal e execute:
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/GibsonCS/onebrain.git
+
+# 2. Entre na pasta do projeto
+cd onebrain
+
+# 3. Build e Execução (em segundo plano)
+docker-compose up -d --build
+```
 
 ## 🧪 Qualidade de Código (Testes)
 Para rodar a suíte de testes unitários e de integração, utilize:
