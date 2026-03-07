@@ -4,17 +4,37 @@
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![Maven](https://img.shields.io/badge/apache_maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 
-O **OneBrain Coupon Manager** é uma API REST robusta desenvolvida em Java com Spring Boot. A aplicação oferece uma solução escalável para a gestão de cupons de desconto, focando em organização de código e performance.
+## 🎯 Objetivo da API
+
+O OneBrain Coupon Manager é uma API REST projetada para gerenciar cupons de desconto de forma simples, segura e escalável.
+
+A solução permite que sistemas de e-commerce, plataformas digitais ou aplicações promocionais criem, consultem e controlem cupons com facilidade, garantindo controle de validade, status e utilização dos cupons.
+
+A API foi construída para ser fácil de integrar em diferentes aplicações, fornecendo endpoints claros para criação, consulta e gerenciamento do ciclo de vida dos cupons.
+
+## 👥 Para quem esta API é destinada
+
+**Esta API é ideal para:**
+
+Plataformas de e-commerce que precisam aplicar descontos promocionais
+
+Sistemas de fidelidade ou campanhas de marketing
+
+Aplicações SaaS que desejam oferecer cupons para seus usuários
+
+Desenvolvedores backend que precisam integrar rapidamente um sistema de cupons
 
 ## 📋 Sobre o Projeto
 
-A aplicação foi construída seguindo rigorosas boas práticas de desenvolvimento backend:
-* **Separação de Camadas:** Responsabilidades bem definidas.
-* **Tratamento Global de Exceções:** Respostas de erro padronizadas.
-* **Validação de Dados:** Garantia de integridade das informações.
-* **Testes Automatizados:** Cobertura com JUnit e Mockito.
+A aplicação foi construída seguindo boas práticas modernas de desenvolvimento backend:
 
----
+Arquitetura em camadas para melhor organização e manutenção do código
+
+Tratamento global de exceções com respostas padronizadas
+
+Validação de dados para garantir integridade das informações
+
+Testes automatizados utilizando JUnit e Mockito
 
 ## 🔌 API Endpoints
 
