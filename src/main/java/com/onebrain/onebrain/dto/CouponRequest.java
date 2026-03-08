@@ -1,5 +1,6 @@
 package com.onebrain.onebrain.dto;
 
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -18,6 +19,7 @@ public record CouponRequest(
         BigDecimal discountValue,
 
         @NotNull
+        @Future
         String expirationDate,
 
 
