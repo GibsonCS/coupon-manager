@@ -187,12 +187,18 @@ cd onebrain
 docker-compose up -d --build
 ```
 
-## 🧪 Qualidade de Código (Testes)
-Para rodar a suíte de testes unitários e de integração, utilize:
+## Test Coverage
+
+O projeto utiliza **JaCoCo** para análise de cobertura de testes.
+
+Para gerar o relatório:
 
 ```bash
-mvn test
+mvn clean verify
 ```
+O relatório será gerado em:
+
+target/site/jacoco/index.html
 
 Develop by: **GibsonCS**
 
