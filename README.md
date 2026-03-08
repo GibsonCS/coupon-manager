@@ -36,15 +36,26 @@ Validação de dados para garantir integridade das informações
 
 Testes automatizados utilizando JUnit e Mockito
 
-## 🔌 API Endpoints
+## 🔌 API Overview
 
-Abaixo estão as rotas disponíveis na aplicação. Você pode testá-las usando ferramentas como **Postman**, **Insomnia** ou **cURL**.
+A API fornece endpoints para gerenciamento de cupons, permitindo criação, consulta e remoção.
 
-| Método | Endpoint | Ação | Status Sucesso |
-| :--- | :--- | :--- | :--- |
-| <img src="https://img.shields.io/badge/POST-brightgreen?style=flat-square" /> | `/coupons` | Cadastra um novo cupom | `201 Created` |
-| <img src="https://img.shields.io/badge/GET-blue?style=flat-square" /> | `/coupons/{id}` | Recupera detalhes por ID | `200 OK` |
-| <img src="https://img.shields.io/badge/DELETE-red?style=flat-square" /> | `/coupons/{id}` | Remove um cupom (Soft Delete) | `204 No Content` |
+### Principais rotas
+
+| Método | Endpoint | Descrição |
+|------|------|------|
+| POST | `/coupons` | Cria um novo cupom |
+| GET | `/coupons/{id}` | Busca um cupom pelo ID |
+| DELETE | `/coupons/{id}` | Remove um cupom |
+
+---
+
+## 📚 Documentação da API
+
+A documentação completa da API está disponível através do **Swagger UI**, onde é possível visualizar todos os endpoints, parâmetros e exemplos de requisição.
+
+Após iniciar a aplicação, acesse:
+http://localhost:8080/swagger-ui.html
 
 
 ## 🏗️ Arquitetura do Sistema
