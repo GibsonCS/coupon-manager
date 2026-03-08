@@ -37,7 +37,6 @@ public class CouponController {
             ))
     })
     public ResponseEntity<CouponResponse> create(@Valid @RequestBody CouponRequest couponRequest) {
-
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(couponService.create(couponRequest));
@@ -52,12 +51,11 @@ public class CouponController {
             @ApiResponse(responseCode = "204", description = "Not found")
     })
     public ResponseEntity<CouponResponse> get(@PathVariable String id) {
-
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(couponService.get(id));
     }
-
+    
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a coupon", description = "Delete a coupon exists")
     @ApiResponses({

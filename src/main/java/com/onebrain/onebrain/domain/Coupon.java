@@ -22,26 +22,27 @@ public class Coupon {
     @Column(unique = true)
     private String code;
 
-    private String description;
-
     @Column(name = "discount_value")
     private BigDecimal discountValue;
 
     @Column(name = "expiration_date")
     private Instant expirationDate;
 
+    private String description;
     private CouponStatus status;
-
     private boolean published;
-
     private boolean redeemed;
-
     private boolean deleted;
 
     protected Coupon() {
     }
 
-    private Coupon(String code, String description, BigDecimal discountValue, Instant expirationDate, boolean published) {
+    private Coupon(String code,
+                   String description,
+                   BigDecimal discountValue,
+                   Instant expirationDate,
+                   boolean published
+    ) {
         this.id = UUID.randomUUID();
         this.code = code;
         this.description = description;
@@ -53,7 +54,12 @@ public class Coupon {
         this.deleted = false;
     }
 
-    public static Coupon create(String code, String description, BigDecimal discountValue, String expirationDate, boolean published) {
+    public static Coupon create(String code,
+                                String description,
+                                BigDecimal discountValue,
+                                String expirationDate,
+                                boolean published
+    ) {
         validateExpirationDate(expirationDate);
         validateDiscount(discountValue);
         String sanitizedCode = sanitizeCode(code);
@@ -62,10 +68,15 @@ public class Coupon {
     }
 
     private static String sanitizeCode(String couponCode) {
-        if (couponCode.length() < 6) throw new BusinessException("Invalid coupon code length");
+        if (couponCode.length() < 6) {
+            throw new BusinessException("Invalid coupon code length");
+        }
+
         String sanitizedCoupon = couponCode.replaceAll("[^a-zA-Z0-9]$", "");
-        if (sanitizedCoupon.length() != 6)
+
+        if (sanitizedCoupon.length() != 6) {
             throw new BusinessException("Invalid coupon code length after remove special characters");
+        }
 
         return sanitizedCoupon;
     }
@@ -88,6 +99,7 @@ public class Coupon {
         if (this.deleted) {
             throw new BusinessException("Coupon already deleted");
         }
+        
         this.deleted = true;
     }
 

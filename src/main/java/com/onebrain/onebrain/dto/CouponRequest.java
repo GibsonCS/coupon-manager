@@ -21,8 +21,7 @@ public record CouponRequest(
         @NotNull
         @Future
         String expirationDate,
-
-
+        
         boolean published
 ) {
 }

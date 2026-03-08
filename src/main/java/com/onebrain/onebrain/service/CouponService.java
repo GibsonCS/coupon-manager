@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @Service
 public class CouponService {
+
     private final CouponRepository couponRepository;
 
     public CouponService(CouponRepository couponRepository) {
@@ -48,8 +49,9 @@ public class CouponService {
     public CouponResponse get(String couponId) {
 
         UUID couponIdUDDI = UUID.fromString(couponId);
-
-        Coupon couponFounded = couponRepository.findById(couponIdUDDI).orElseThrow(() -> new BusinessException("Coupon not exists"));
+        
+        Coupon couponFounded = couponRepository.findById(couponIdUDDI).orElseThrow(() ->
+                new BusinessException("Coupon not exists"));
 
         return new CouponResponse(
                 couponFounded.getId(),
@@ -66,13 +68,12 @@ public class CouponService {
     public void delete(String couponId) {
         UUID couponIdUUID = UUID.fromString(couponId);
 
-        couponRepository.findById(couponIdUUID)
-                .ifPresentOrElse(c -> {
-                            c.delete();
-                            couponRepository.save(c);
-                        }, () -> {
-                            throw new BusinessException("Coupon not exists");
-                        }
-                );
+        couponRepository.findById(couponIdUUID).ifPresentOrElse(c -> {
+                    c.delete();
+                    couponRepository.save(c);
+                }, () -> {
+                    throw new BusinessException("Coupon not exists");
+                }
+        );
     }
 }
