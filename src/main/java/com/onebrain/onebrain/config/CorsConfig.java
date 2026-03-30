@@ -15,7 +15,7 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry
                         .addMapping("/**")
-                        .allowedOrigins("https://cm.gtech.dev.br")
+                        .allowedOrigins("*")
                         .allowedHeaders("*")
                         .allowedMethods("GET", "POST", "DELETE");
             }
