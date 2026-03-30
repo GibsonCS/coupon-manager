@@ -12,10 +12,16 @@ import org.springframework.context.annotation.Configuration;
                 version = "v1.0.0",
                 contact = @Contact(
                         name = "Gibson Cruz",
-                        url = "https://github.com/GibsonCS/onebrain/"
+                        url = "https://github.com/GibsonCS/coupon-manager/"
                 ),
                 summary = "API for discount coupon manager"
         )
 )
 public class OpenApiConfiguration {
+
+	@Bean
+	public OpenAPI customOpenAPI(){
+		return new OpenAPI()
+			.addServersItem(new Server().url("https://cm.gtech.dev.br"));
+	}
 }
