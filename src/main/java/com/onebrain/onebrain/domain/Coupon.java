@@ -57,14 +57,14 @@ public class Coupon {
     public static Coupon create(String code,
                                 String description,
                                 BigDecimal discountValue,
-                                String expirationDate,
+                                Instant expirationDate,
                                 boolean published
     ) {
         validateExpirationDate(expirationDate);
         validateDiscount(discountValue);
         String sanitizedCode = sanitizeCode(code);
 
-        return new Coupon(sanitizedCode, description, discountValue, Instant.parse(expirationDate).atZone(ZoneId.of("UTC")).toInstant(), published);
+        return new Coupon(sanitizedCode, description, discountValue, expirationDate.atZone(ZoneId.of("UTC")).toInstant(), published);
     }
 
     private static String sanitizeCode(String couponCode) {
@@ -81,8 +81,8 @@ public class Coupon {
         return sanitizedCoupon;
     }
 
-    private static void validateExpirationDate(String expirationDate) {
-        LocalDate localDate = Instant.parse(expirationDate).atZone(ZoneId.of("UTC")).toLocalDate();
+    private static void validateExpirationDate(Instant expirationDate) {
+        LocalDate localDate = expirationDate.atZone(ZoneId.of("UTC")).toLocalDate();
 
         if (localDate.isBefore(LocalDate.now())) {
             throw new BusinessException("Invalid coupon expiration date");
@@ -99,7 +99,7 @@ public class Coupon {
         if (this.deleted) {
             throw new BusinessException("Coupon already deleted");
         }
-        
+
         this.deleted = true;
     }
 

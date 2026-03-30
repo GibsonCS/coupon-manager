@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,7 +38,7 @@ class CouponServiceTest {
                 "ACDEA3",
                 "",
                 new BigDecimal("0.5"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false
         );
 
@@ -45,7 +46,7 @@ class CouponServiceTest {
                 "ACDEA3",
                 "TEST OF COUPON CREATE",
                 new BigDecimal("0.5"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false
         );
 
@@ -64,7 +65,7 @@ class CouponServiceTest {
                 "ACDEA4",
                 "TEST OF COUPON CREATE",
                 new BigDecimal("0.5"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false
         );
 
@@ -72,7 +73,7 @@ class CouponServiceTest {
                 "ACDEA4",
                 "TEST OF COUPON CREATE",
                 new BigDecimal("0.5"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false
         );
 
@@ -113,7 +114,7 @@ class CouponServiceTest {
                 "ACDEA4",
                 "TEST OF COUPON CREATE",
                 new BigDecimal("0.5"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false
         );
 
@@ -137,7 +138,7 @@ class CouponServiceTest {
                 "ACDEA4",
                 "TEST OF COUPON CREATE",
                 new BigDecimal("0.5"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false
         );
 
@@ -159,7 +160,7 @@ class CouponServiceTest {
                 "ACDEA4",
                 "TEST OF COUPON CREATE",
                 new BigDecimal("0.5"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false
         );
 

@@ -3,6 +3,7 @@ package com.onebrain.onebrain.exception;
 import jakarta.validation.UnexpectedTypeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -31,5 +32,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(apiResponseError);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiResponseError> handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException methodArgumentNotValidException
+    ) {
+        ApiResponseError apiResponseError = new ApiResponseError(
+                methodArgumentNotValidException.getStatusCode().value(),
+                methodArgumentNotValidException.getMessage()
+        );
+
+        return ResponseEntity.status(methodArgumentNotValidException.getStatusCode()).body(apiResponseError);
     }
 }

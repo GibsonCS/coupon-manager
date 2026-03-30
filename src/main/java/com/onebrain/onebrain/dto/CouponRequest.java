@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 
 public record CouponRequest(
         @NotNull()
@@ -19,9 +20,9 @@ public record CouponRequest(
         BigDecimal discountValue,
 
         @NotNull
-        @Future
-        String expirationDate,
-        
+        @Future(message = "The date must be in future")
+        Instant expirationDate,
+
         boolean published
 ) {
 }

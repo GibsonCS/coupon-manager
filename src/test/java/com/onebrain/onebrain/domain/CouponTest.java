@@ -4,6 +4,7 @@ import com.onebrain.onebrain.exception.BusinessException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +16,7 @@ public class CouponTest {
                 "123",
                 "Description",
                 new BigDecimal("0.5"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false)
         );
 
@@ -30,7 +31,7 @@ public class CouponTest {
                 "123SDF",
                 "Description",
                 new BigDecimal("0.5"),
-                "2026-02-04T17:14:45.180Z",
+                Instant.parse("2026-02-04T17:14:45.180Z"),
                 false)
         );
 
@@ -45,7 +46,7 @@ public class CouponTest {
                 "A123SADA$%#",
                 "Description",
                 new BigDecimal("0.5"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false)
         );
 
@@ -61,7 +62,7 @@ public class CouponTest {
                 "A123SA",
                 "Description",
                 new BigDecimal("0.3"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false)
         );
 
@@ -76,7 +77,7 @@ public class CouponTest {
                 "A123SA",
                 "Description",
                 new BigDecimal("0.6"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false
         );
         assertEquals("A123SA", coupon.getCode());
@@ -89,7 +90,7 @@ public class CouponTest {
                 "A123SA",
                 "Description",
                 new BigDecimal("0.6"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false
         );
 
@@ -108,7 +109,7 @@ public class CouponTest {
                 "A123SA",
                 "Description",
                 new BigDecimal("0.6"),
-                "2026-11-04T17:14:45.180Z",
+                Instant.parse("2026-11-04T17:14:45.180Z"),
                 false
         );
 
